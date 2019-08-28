@@ -1,0 +1,12 @@
+[[inputs.cisco_telemetry_gnmi]]
+  addresses = ["{{ ipaddr }}"]
+  username = "${GNMI_USERNAME}"
+  password = "${GNMI_PASSWORD}"
+  redial = "10s"
+  [[inputs.cisco_telemetry_gnmi.subscription]]
+    name = "cisco-oc-interfaces"
+    origin = "openconfig-interfaces"
+    path = "/interfaces"
+    subscription_mode = "sample"
+    sample_interval = "10s"
+    

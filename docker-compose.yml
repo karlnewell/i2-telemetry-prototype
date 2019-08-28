@@ -51,7 +51,8 @@ services:
   telegraf:
     image: telegraf:latest
     volumes:
-      - $PWD/telegraf.conf:/etc/telegraf/telegraf.conf
+      - telegraf-storage:/etc/telegraf
+      - $PWD/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf
     depends_on:
       - influxdb
     environment:
@@ -61,8 +62,23 @@ services:
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
       - GNMI_USERNAME=${GNMI_USERNAME}
       - GNMI_PASSWORD=${GNMI_PASSWORD}
+    command: --config-directory /etc/telegraf/telegraf.d
+  configurator:
+    build: ./telegraf
+    volumes:
+      - telegraf-storage:/etc/telegraf
+      - $PWD/telegraf:/config
+    environment:
+      - INFLUXDB_URL=${INFLUXDB_URL}
+      - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
+      - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
+      - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
+      - GNMI_USERNAME=${GNMI_USERNAME}
+      - GNMI_PASSWORD=${GNMI_PASSWORD}
+    command: python /config/generate_config.py
 
 volumes:
   influxdb-storage:
   chronograf-storage:
   grafana-storage:
+  telegraf-storage:

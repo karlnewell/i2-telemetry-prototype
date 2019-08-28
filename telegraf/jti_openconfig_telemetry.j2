@@ -1,0 +1,9 @@
+[[inputs.jti_openconfig_telemetry]]
+  servers = ["{{ ipaddr }}"]
+  username = "${GNMI_USERNAME}"
+  password = "${GNMI_PASSWORD}"
+  client_id = "telegraf"
+  sample_frequency = "2000ms"
+  sensors = ["junos /interfaces/"]
+  retry_delay = "10000ms"
+  
