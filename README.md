@@ -1,4 +1,19 @@
-Create a `.env` file with the following
+# Internet2 Streaming Telemetry Prototype
+
+## Getting Started
+
+### Prerequisites
+
+docker and docker-compose  
+See [example router configs](#example-router-configs) below
+
+### Installing
+
+Clone this repo
+```
+git clone https://github.internet2.edu/internet2/i2-telemetry-prototype.git
+```
+Create a `.env` file with the following (replace the items in {})
 ```
 INFLUXDB_USERNAME={influx username}
 INFLUXDB_PASSWORD={influx password}
@@ -13,7 +28,7 @@ GNMI_PASSWORD={router password}
 ```
 Copy `config/nodes.yaml.dist` to `config/nodes.yaml` and edit.
 
-Run
+Run docker-compose
 `docker-compose up -d`
 
 docker-compose creates the container `configurator` to generate the telegraf.d config files based on `nodes.yaml`.  
@@ -21,6 +36,10 @@ docker-compose creates the container `configurator` to generate the telegraf.d c
 Edit `nodes.yaml` and add/update Jinja2 templates, then (re)start `configurator` to regenerate the config files.  
 
 Reload telegraf (`docker-compose exec telegraf kill -SIGHUP 1`) after generating configs.
+
+### Using
+Chronograf (data exploration) - http://{dockerhost.ip}:8888  
+Grafana (visualization) - http://{dockerhost.ip}:3000
 
 ### Example router configs
 #### Junos
