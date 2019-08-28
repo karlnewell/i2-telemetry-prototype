@@ -13,14 +13,14 @@ GNMI_PASSWORD={router password}
 ```
 Copy `config/nodes.yaml.dist` to `config/nodes.yaml` and edit.
 
+Run
+`docker-compose up -d`
+
 docker-compose creates the container `configurator` to generate the telegraf.d config files based on `nodes.yaml`.  
 
 Edit `nodes.yaml` and add/update Jinja2 templates, then (re)start `configurator` to regenerate the config files.  
 
 Reload telegraf (`docker-compose exec telegraf kill -SIGHUP 1`) after generating configs.
-
-Run
-`docker-compose up -d`
 
 ### Example router configs
 #### Junos
