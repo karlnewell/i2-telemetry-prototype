@@ -63,11 +63,13 @@ services:
       - GNMI_USERNAME=${GNMI_USERNAME}
       - GNMI_PASSWORD=${GNMI_PASSWORD}
     command: --config-directory /etc/telegraf/telegraf.d
+    depends_on: 
+      - configurator
   configurator:
     build: ./telegraf
     volumes:
       - telegraf-storage:/etc/telegraf
-      - $PWD/telegraf:/config
+      - $PWD/config:/config
     environment:
       - INFLUXDB_URL=${INFLUXDB_URL}
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}

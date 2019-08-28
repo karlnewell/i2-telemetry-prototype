@@ -1,10 +1,10 @@
 ---
 nslab-qfx10002-1:
-  ipaddr: 10.39.0.66:32767
+  ipaddr: {ip address}:32767
   template: jti_openconfig_telemetry.j2
 nslab-qfx10002-2:
-  ipaddr: 10.39.0.67:32767
+  ipaddr: {ip address}:32767
   template: jti_openconfig_telemetry.j2
 nslab-xrv9000-1:
-  ipaddr: 10.39.0.54:32767
+  ipaddr: {ip address}:32767
   template: cisco_telemetry_gnmi.j2
