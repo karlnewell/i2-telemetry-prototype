@@ -40,16 +40,9 @@ services:
       - INFLUXDB_DATABASE=${INFLUXDB_DATABASE}
       - INFLUXDB_USERNAME=${INFLUXDB_USERNAME}
       - INFLUXDB_PASSWORD=${INFLUXDB_PASSWORD}
-  # jtimon:
-  #   image: jtimon:latest
-  #   volumes:
-  #     - ./jtimon/:/u
-  #   working_dir: /u
-  #   command: --config-file-list nslab.json
-  #   depends_on:
-  #     - influxdb
   telegraf:
-    image: telegraf:latest
+    # image: telegraf:latest
+    build: ./telegraf
     volumes:
       - telegraf-storage:/etc/telegraf
       - $PWD/telegraf/telegraf.conf:/etc/telegraf/telegraf.conf

@@ -1,5 +1,5 @@
 [[inputs.cisco_telemetry_gnmi]]
-  addresses = ["{{ ipaddr }}"]
+  addresses = ["{{ ipaddr }}:{{ gnmiport }}"]
   username = "${GNMI_USERNAME}"
   password = "${GNMI_PASSWORD}"
   redial = "10s"

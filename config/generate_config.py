@@ -14,9 +14,10 @@ env = Environment(loader=FileSystemLoader('/config'))
 with open("/config/nodes.yaml") as y:
   nodes = yaml.load(y, Loader=yaml.SafeLoader)
   for node, value in nodes.items():
-#    print(value["template"])
-    template = env.get_template(value["template"])
-    f = open('/etc/telegraf/telegraf.d/{}.conf'.format(node), 'w')
-    config = template.render(value)
-    f.write(config)
-    f.close
+    # print(value["template"])
+    for t in value["template"]:
+      template = env.get_template(t)
+      f = open('/etc/telegraf/telegraf.d/{}.{}.conf'.format(node, t), 'w')
+      config = template.render(value)
+      f.write(config)
+      f.close
